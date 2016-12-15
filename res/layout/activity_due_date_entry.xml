@@ -17,7 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="44dp"
-        android:text="Please enter your due date!" />
+        android:text="@string/duedate_input_title" />
 
     <DatePicker
         android:id="@+id/datePicker"
@@ -34,6 +34,6 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/datePicker1"
         android:layout_centerVertical="true"
-        android:text="Save" />
+        android:text="@string/save_btn_title" />
 
 </LinearLayout>

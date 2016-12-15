@@ -3,6 +3,8 @@
 
     <string name="app_name">Pregnancy Progress</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="duedate_input_title">Please enter your due date!</string>
+    <string name="save_btn_title">Save</string>
+    <string name="progressbar_title">Pregnancy Progress:</string>
 
 </resources>

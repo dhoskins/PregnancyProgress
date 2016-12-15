@@ -28,7 +28,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:padding="2dp"
-		        android:text="Pregnancy Progress:"
+		        android:text="@string/progressbar_title"
 		        android:textAppearance="?android:attr/textAppearanceMedium" />
 		    <TextView 
 		        android:id="@+id/tvPercent"

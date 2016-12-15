@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Schwangerschaftsfortschritt</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="duedate_input_title">Gebe hier den Geburtstermin ein</string>
+    <string name="save_btn_title">Übernehmen</string>
+    <string name="progressbar_title">Schwangerschaftsfortschritt:</string>
+</resources>
