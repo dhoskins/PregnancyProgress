@@ -6,5 +6,6 @@
     <string name="duedate_input_title">Please enter your due date!</string>
     <string name="save_btn_title">Save</string>
     <string name="progressbar_title">Pregnancy Progress:</string>
+    <string name="progressbar_tooltip">Tap here to set your due dates</string>
 
 </resources>
