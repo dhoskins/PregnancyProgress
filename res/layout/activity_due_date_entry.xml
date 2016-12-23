@@ -14,8 +14,6 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="44dp"
         android:text="@string/duedate_input_title" />
 
@@ -23,8 +21,6 @@
         android:id="@+id/datePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
         android:calendarViewShown="false"
         android:layout_marginTop="26dp" />
 
@@ -32,8 +28,6 @@
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/datePicker1"
-        android:layout_centerVertical="true"
         android:text="@string/save_btn_title" />
 
 </LinearLayout>
