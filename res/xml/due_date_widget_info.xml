@@ -2,7 +2,7 @@
     android:minWidth="300dp"
     android:minHeight="60dp"
     android:updatePeriodMillis="86400000"
-    android:configure="co.hosk.pregnancyprogress.DueDateConfig"
+    android:configure="co.hosk.pregnancyprogress.DueDateWidgetConfigure"
     android:initialLayout="@layout/widget_due_date"
     android:resizeMode="horizontal"
     android:widgetCategory="home_screen|keyguard">

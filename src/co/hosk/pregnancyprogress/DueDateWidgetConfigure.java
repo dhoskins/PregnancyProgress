@@ -2,6 +2,7 @@ package co.hosk.pregnancyprogress;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,18 +10,30 @@ import android.widget.DatePicker;
 
 import java.util.Calendar;
 
-public class DueDateConfig extends Activity {
+public class DueDateWidgetConfigure extends Activity {
+
+    // log tag
+    private static final String TAG = "DueDateWidgetConfigure";
 
     private static final long PRAGNACY_DURATION_IN_MILLIS = 40L * 7 * 24 * 60 * 60 * 1000;
     private static final String TimeKey = "time";
     private Settings s;
-    private int _AppWidgetId;
-    private Intent _Result;
+    int _AppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
     private long lastDueDate = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Set the result to CANCELED.  This will cause the widget host to cancel
+        // out of the widget placement if they press the back button.
+        setResult(RESULT_CANCELED);
+
+        // Set the view layout resource to use.
+        setContentView(R.layout.activity_due_date_entry);
+
+
+        // Find the widget id from the intent.
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         if (extras != null) {
@@ -29,7 +42,12 @@ public class DueDateConfig extends Activity {
                     AppWidgetManager.INVALID_APPWIDGET_ID);
 
         }
-        setContentView(R.layout.activity_due_date_entry);
+
+        // If they gave us an intent without the widget id, just bail.
+        if (_AppWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
+            finish();
+        }
+
         s = new Settings(this);
 
         final DatePicker conceptionDatePicker = (DatePicker) findViewById(R.id.conceptionDate_datePicker);
@@ -39,18 +57,25 @@ public class DueDateConfig extends Activity {
         // just in case to put dates in sync
         updateDueDatePicker(conceptionDatePicker, dueDatePicker);
 
-        View v = findViewById(R.id.saveButton);
-        v.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.saveButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveTime(getTimeInMillsByDatePicker(dueDatePicker));
+                final Context context = DueDateWidgetConfigure.this;
+                long time = getTimeInMillsByDatePicker(dueDatePicker);
+                s.put(TimeKey, String.valueOf(time));
+
+                // Push widget update
+                final AppWidgetManager awm = AppWidgetManager.getInstance(context);
+                DueDateWidgetProvider.updateAppWidget(context, awm, _AppWidgetId);
+
+                // Make sure we pass back the original appWidgetId
+                Intent resultValue = new Intent();
+                resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, _AppWidgetId);
+                setResult(RESULT_OK, resultValue);
+                finish();
             }
         });
 
-
-        _Result = new Intent();
-        _Result.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, _AppWidgetId);
-        setResult(RESULT_CANCELED, _Result);
     }
 
     private void initDueDatePicker(DatePicker conceptionDatePicker, DatePicker dueDatePicker) {
@@ -78,7 +103,6 @@ public class DueDateConfig extends Activity {
                     public void onDateChanged(DatePicker datePicker, int year, int month, int day) {
                         conceptionDatePicker.setBackgroundColor((int) (Math.random() * 256 * 256 * 256));
                         updateConceptionDatePicker(conceptionDatePicker, dueDatePicker);
-                        //  saveTime(getTimeInMillsByDatePicker(dueDatePicker));
                     }
                 }
         );
@@ -112,7 +136,6 @@ public class DueDateConfig extends Activity {
                     public void onDateChanged(DatePicker datePicker, int year, int month, int day) {
                         dueDatePicker.setBackgroundColor((int) (Math.random() * 256 * 256 * 256));
                         updateDueDatePicker(conceptionDatePicker, dueDatePicker);
-                        //saveTime(getTimeInMillsByDatePicker(dueDatePicker));
                     }
                 }
         );
@@ -146,12 +169,4 @@ public class DueDateConfig extends Activity {
         return time;
     }
 
-    private void saveTime(long time) {
-        s.put(TimeKey, String.valueOf(time));
-
-        final AppWidgetManager awm = AppWidgetManager.getInstance(this);
-        DueDateWidget.updateAppWidget(this, awm, _AppWidgetId);
-        setResult(RESULT_OK, _Result);
-        finish();
-    }
 }
