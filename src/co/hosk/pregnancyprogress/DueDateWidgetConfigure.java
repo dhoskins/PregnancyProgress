@@ -79,7 +79,7 @@ public class DueDateWidgetConfigure extends Activity {
 
     }
 
-    private void initDueDatePicker(DatePicker conceptionDatePicker, DatePicker dueDatePicker) {
+    private void initDueDatePicker(final DatePicker conceptionDatePicker, final DatePicker dueDatePicker) {
         Calendar cal = Calendar.getInstance();
 
         // Set a max date of 9 months from today
@@ -110,7 +110,7 @@ public class DueDateWidgetConfigure extends Activity {
 
     }
 
-    private void initConceptionDatePicker(DatePicker conceptionDatePicker, DatePicker dueDatePicker) {
+    private void initConceptionDatePicker(final DatePicker conceptionDatePicker, final DatePicker dueDatePicker) {
         Calendar conceptionDateCalendar = Calendar.getInstance();
 
         // Set a max date to today
