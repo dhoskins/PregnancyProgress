@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 
@@ -147,15 +148,17 @@ public class DueDateWidgetConfigure extends Activity {
         if (lastDueDate != dueDateInMillis) {
             lastDueDate = dueDateInMillis;
             conceptionDatePicker.getCalendarView().setDate(conceptionDateInMillis);
+            Log.d(TAG, "conceptionDatePicker refreshed");
         }
     }
 
     private void updateDueDatePicker(DatePicker conceptionDatePicker, DatePicker dueDatePicker) {
         long conceptionDateInMillis = getTimeInMillsByDatePicker(conceptionDatePicker);
         long dueDateInMillis = conceptionDateInMillis + PRAGNACY_DURATION_IN_MILLIS;
-        if (lastDueDate != dueDateInMillis){
+        if (lastDueDate != dueDateInMillis) {
             lastDueDate = dueDateInMillis;
             dueDatePicker.getCalendarView().setDate(dueDateInMillis);
+            Log.d(TAG, "dueDatePicker refreshed");
         }
     }
 

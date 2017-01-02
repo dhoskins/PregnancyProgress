@@ -1,8 +1,5 @@
 package co.hosk.pregnancyprogress;
 
-import org.joda.time.DateTime;
-import org.joda.time.Days;
-
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -12,14 +9,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+
 public class DueDateWidgetProvider extends AppWidgetProvider {
 
     // log tag
-    private static final String TAG = "DueDateWidgetConfigure";
+    private static final String TAG = "DueDateWidgetProvider";
 
 
     private static final int totalDays = 40 * 7;
-    
+
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
@@ -34,20 +34,20 @@ public class DueDateWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,
-            int[] appWidgetIds) {
+                         int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
         Log.d(TAG, "onUpdate");
         final int N = appWidgetIds.length;
 
         // Perform this loop procedure for each App Widget that belongs to this provider
-        for (int i=0; i<N; i++) {
+        for (int i = 0; i < N; i++) {
             int appWidgetId = appWidgetIds[i];
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
     }
-    
+
     public static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-            int appWidgetId) {
+                                       int appWidgetId) {
         Settings settings = new Settings(context);
         String val = settings.get("time");
         Log.d(TAG, "Saved DueDate is: " + val);
@@ -55,7 +55,7 @@ public class DueDateWidgetProvider extends AppWidgetProvider {
         if (val != null) {
             views.setViewVisibility(R.id.main, View.VISIBLE);
             views.setViewVisibility(R.id.alert, View.GONE);
-            
+
             long time = Long.parseLong(val, 10);
             DateTime dueDate = new DateTime(time);
             DateTime conceptionDate = dueDate.minusDays(totalDays);
@@ -63,12 +63,12 @@ public class DueDateWidgetProvider extends AppWidgetProvider {
             int percent = (actualDays * 100) / (totalDays);
             int weeks = actualDays / 7;
             int days = actualDays % 7;
-            
+
             views.setProgressBar(R.id.progress, totalDays, actualDays, false);
-            Log.d(TAG, String.format(" Progress %d / %d",(actualDays * 100), (totalDays * 100)));
+            Log.d(TAG, String.format(" Progress %d / %d", (actualDays * 100), (totalDays * 100)));
             views.setTextViewText(R.id.tvPercent, percent + "%");
-            views.setTextViewText(R.id.tvWeeks, ""+weeks);
-            views.setTextViewText(R.id.tvDays, "+"+days);
+            views.setTextViewText(R.id.tvWeeks, "" + weeks);
+            views.setTextViewText(R.id.tvDays, "+" + days);
 
             Intent intent = new Intent(context, DueDateWidgetConfigure.class);
             intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);

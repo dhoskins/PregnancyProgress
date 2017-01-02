@@ -5,5 +5,4 @@
     android:configure="co.hosk.pregnancyprogress.DueDateWidgetConfigure"
     android:initialLayout="@layout/widget_due_date"
     android:resizeMode="horizontal"
-    android:widgetCategory="home_screen|keyguard">
-</appwidget-provider>
+    android:widgetCategory="home_screen|keyguard"></appwidget-provider>
