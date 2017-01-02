@@ -1,0 +1,34 @@
+apply plugin: 'com.android.application'
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+       /**
+        * applicationId uniquely identifies the package for publishing.
+        * However, your source code should still reference the package name
+        * defined by the package attribute in the main/AndroidManifest.xml file.
+        */
+        applicationId "co.hosk.pregnancyprogress"
+        minSdkVersion 12
+        targetSdkVersion 25
+        // Defines the version number of your app.
+        versionCode 1
+    
+        // Defines a user-friendly version name for your app.
+        versionName "1.0"
+	//multiDexEnabled = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:25.1.0'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
