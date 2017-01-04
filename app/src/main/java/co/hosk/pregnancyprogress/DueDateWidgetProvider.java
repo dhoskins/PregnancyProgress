@@ -9,9 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
-import org.joda.time.DateTime;
-import org.joda.time.Days;
-
 public class DueDateWidgetProvider extends AppWidgetProvider {
 
     // log tag
@@ -56,10 +53,11 @@ public class DueDateWidgetProvider extends AppWidgetProvider {
             views.setViewVisibility(R.id.main, View.VISIBLE);
             views.setViewVisibility(R.id.alert, View.GONE);
 
-            long time = Long.parseLong(val, 10);
-            DateTime dueDate = new DateTime(time);
-            DateTime conceptionDate = dueDate.minusDays(totalDays);
-            int actualDays = Days.daysBetween(conceptionDate, new DateTime()).getDays();
+            long dueDateTime = Long.parseLong(val, 10);
+            long now = System.currentTimeMillis();
+            long remainingDurration = dueDateTime - now;
+            int remainingDays = (int) (remainingDurration/(24*60*60*1000));
+            int actualDays = totalDays - remainingDays;
             int percent = (actualDays * 100) / (totalDays);
             int weeks = actualDays / 7;
             int days = actualDays % 7;
