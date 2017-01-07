@@ -53,6 +53,7 @@
                 android:indeterminate="false"
                 android:indeterminateOnly="false"
                 android:paddingTop="4dp"
+                android:saveEnabled="false"
                 android:paddingRight="4dp" />
 
             <TextView
