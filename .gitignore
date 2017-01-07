@@ -1,0 +1,11 @@
+.classpath
+.git
+.gradle
+.idea
+.project
+PregnancyProgress.iml
+build
+gen
+local.properties
+keystore.properties
+*.apk
