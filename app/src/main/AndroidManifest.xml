@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="co.hosk.pregnancyprogress"
+    package="com.github.kartenkarsten.pregnancyprogress"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -14,13 +14,13 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name="co.hosk.pregnancyprogress.DueDateWidgetConfigure"
+            android:name="com.github.kartenkarsten.pregnancyprogress.DueDateWidgetConfigure"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
-        <receiver android:name="co.hosk.pregnancyprogress.DueDateWidgetProvider">
+        <receiver android:name="com.github.kartenkarsten.pregnancyprogress.DueDateWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

@@ -20,7 +20,7 @@ android {
         * However, your source code should still reference the package name
         * defined by the package attribute in the main/AndroidManifest.xml file.
         */
-        applicationId "co.hosk.pregnancyprogress"
+        applicationId "com.github.kartenkarsten.pregnancyprogress"
         minSdkVersion 12
         targetSdkVersion 25
         // Defines the version number of your app.

@@ -1,4 +1,4 @@
-package co.hosk.pregnancyprogress;
+package com.github.kartenkarsten.pregnancyprogress;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,4 +1,4 @@
-package co.hosk.pregnancyprogress;
+package com.github.kartenkarsten.pregnancyprogress;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
