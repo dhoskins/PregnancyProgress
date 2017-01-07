@@ -1,0 +1,56 @@
+apply plugin: 'com.android.application'
+
+// Create a variable called keystorePropertiesFile, and initialize it to your
+// keystore.properties file, in the rootProject folder.
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+
+// Initialize a new Properties() object called keystoreProperties.
+def keystoreProperties = new Properties()
+
+// Load your keystore.properties file into the keystoreProperties object.
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+       /**
+        * applicationId uniquely identifies the package for publishing.
+        * However, your source code should still reference the package name
+        * defined by the package attribute in the main/AndroidManifest.xml file.
+        */
+        applicationId "com.github.kartenkarsten.pregnancyprogress"
+        minSdkVersion 12
+        targetSdkVersion 25
+        // Defines the version number of your app.
+        versionCode 1
+    
+        // Defines a user-friendly version name for your app.
+        versionName "1.0"
+	//multiDexEnabled = true
+    }
+
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:25.1.0'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
